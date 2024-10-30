@@ -46,7 +46,7 @@ function main() {
 
     base.position.y = mesh_base.scale.y;
 
-
+    
     function createFinger(length,radius) {
         const fingerGeometry = new THREE.CylinderGeometry(radius,radius,length,16);
         const fingerMaterial = new THREE.MeshPhongMaterial({ color: "red" });
@@ -55,11 +55,12 @@ function main() {
         return finger;
     }
 
+    //엄지손가락
     function addThumbs(base) {
-        const fingerLengths = [2.0,2.0]
-        const radius=0.7
-        const base_x=-4.3
-        const base_y=2.8
+        const fingerLengths = [2.0,2.0] //기본 길이
+        const radius=0.7 //기본 원 크기
+        const base_x=-4.3 //기본 x 좌표
+        const base_y=2.8 //기본 y 좌표
 
         for(let i=0;i<fingerLengths.length;i++){
             const fingerJoint=createFinger(fingerLengths[i],radius)
@@ -72,8 +73,10 @@ function main() {
         }
     }
 
+    //손목
     function addWrists(base) {
-        const fingerGeometry = new THREE.CylinderGeometry(1.2,1.2,6,16)
+        const radius=1.2
+        const fingerGeometry = new THREE.CylinderGeometry(radius,radius,6,16) 
         fingerGeometry.scale(3,1,0.8)
         const fingerMaterial = new THREE.MeshPhongMaterial({color:"red"})
         const finger = new THREE.Mesh(fingerGeometry,fingerMaterial)
@@ -83,8 +86,8 @@ function main() {
     }
 
     function addRemainFingers(base) {
-        const fingerLengths = [3.6,4.7,3.9,3.3]; // 손가락 길이 예제
-        const radius=0.65
+        const fingerLengths = [3.6,4.7,3.9,3.3]; // 손가락 길이
+        const radius=0.65 // 기본 원 크기
         for (let i = 0; i < 4; i++) {
             for(let j=0; j<3; j++){
                 const finger = createFinger(fingerLengths[i],radius);
