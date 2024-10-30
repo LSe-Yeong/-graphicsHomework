@@ -47,8 +47,8 @@ function main() {
     base.position.y = mesh_base.scale.y;
 
 
-    function createFinger(length) {
-        const fingerGeometry = new THREE.CylinderGeometry(0.2,0.2,length,16);
+    function createFinger(length,radius) {
+        const fingerGeometry = new THREE.CylinderGeometry(radius,radius,length,16);
         const fingerMaterial = new THREE.MeshPhongMaterial({ color: "red" });
         const finger = new THREE.Mesh(fingerGeometry, fingerMaterial);
     
@@ -56,26 +56,47 @@ function main() {
     }
 
     function addThumbs(base) {
-        
-    }
+        const fingerLengths = [2.0,2.0]
+        const radius=0.7
+        const base_x=-4.3
+        const base_y=2.8
 
-    function addWrists(base) {
-
-    }
-
-    function addFingers(base) {
-        const fingerLengths = [1.5, 1.7, 1.2, 1.4]; // 손가락 길이 예제
-    
-        for (let i = 0; i < 4; i++) {
-            const finger = createFinger(fingerLengths[i]);
-            finger.position.set(-1.5 + i, 1.2, 0); // 손가락 위치 설정
-            base.add(finger);
+        for(let i=0;i<fingerLengths.length;i++){
+            const fingerJoint=createFinger(fingerLengths[i],radius)
+            fingerJoint.position.set(base_x, base_y+((i)*fingerLengths[i]), 0); // 손가락 위치 설정
+            fingerJoint.rotation.z = Math.PI / 12
+            if(i>=1){
+                fingerJoint.position.set(base_x-(0.52*(i)),base_y+((i)*fingerLengths[i])-0.07, 0)
+            }
+            base.add(fingerJoint);
         }
     }
 
-    
+    function addWrists(base) {
+        const fingerGeometry = new THREE.CylinderGeometry(1.2,1.2,6,16)
+        fingerGeometry.scale(3,1,0.8)
+        const fingerMaterial = new THREE.MeshPhongMaterial({color:"red"})
+        const finger = new THREE.Mesh(fingerGeometry,fingerMaterial)
 
-    addFingers(base)
+        finger.position.set(0,3.5,0)
+        base.add(finger)
+    }
+
+    function addRemainFingers(base) {
+        const fingerLengths = [3.6,4.7,3.9,3.3]; // 손가락 길이 예제
+        const radius=0.65
+        for (let i = 0; i < 4; i++) {
+            for(let j=0; j<3; j++){
+                const finger = createFinger(fingerLengths[i],radius);
+                finger.position.set(-2.2 + i*1.5 , 7.5-(1.0-fingerLengths[i]/2)+j, 0); // 손가락 위치 설정
+                base.add(finger);
+            }
+        }
+    }
+
+    addWrists(base)
+    addThumbs(base)
+    addRemainFingers(base)
 
     //변화가 감지될 때 실행
     function onChange(event, ui) {
