@@ -189,23 +189,23 @@ function main() {
             wrist.rotation.x = -radianValue
         }
         else if(id === "slider-fingers"){
-            thumbJoint[0].rotation.z = radianValue*5.0
-            thumbJoint[0].position.y = radianValue*15
+            thumbJoint[0].rotation.z = radianValue*3.0
+            // thumbJoint[0].position.y = radianValue*20
             thumbJoint[0].position.x = radianValue*4.0
 
-            fJoint[0].rotation.z = radianValue*3.5
-            fJoint[0].position.y = radianValue*12
-            fJoint[0].position.x = radianValue*15
+            fJoint[0].rotation.z = radianValue*2.0
+            // fJoint[0].position.y = radianValue*12
+            fJoint[0].position.x = radianValue*11
 
-            sJoint[0].rotation.z = radianValue*2.5
-            sJoint[0].position.x = radianValue*15
+            sJoint[0].rotation.z = radianValue*1.0
+            sJoint[0].position.x = radianValue*5
 
-            tJoint[0].rotation.z = -radianValue*2.5
-            tJoint[0].position.x = -radianValue*15
+            tJoint[0].rotation.z = -radianValue*1.5
+            tJoint[0].position.x = -radianValue*10
 
-            lJoint[0].rotation.z = -radianValue*3.5
-            lJoint[0].position.x = -radianValue*15
-            lJoint[0].position.y = radianValue*12
+            lJoint[0].rotation.z = -radianValue*2.0
+            lJoint[0].position.x = -radianValue*12
+            // lJoint[0].position.y = radianValue*12
         }
         //엄지
         else if(id === "slider-thumb-joint2"){
